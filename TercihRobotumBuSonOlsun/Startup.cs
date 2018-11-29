@@ -1,8 +1,6 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(TercihRobotumBuSonOlsun.Startup))]
-namespace TercihRobotumBuSonOlsun
+namespace IdentitySample
 {
     public partial class Startup
     {

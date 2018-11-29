@@ -1,6 +1,6 @@
-﻿@model TercihRobotumBuSonOlsun.Models.VerifyPhoneNumberViewModel
+﻿@model IdentitySample.Models.VerifyPhoneNumberViewModel
 @{
-    ViewBag.Title = "Telefon numarasını doğrulayın";
+    ViewBag.Title = "Verify Phone Number";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -9,7 +9,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.Hidden("phoneNumber", @Model.PhoneNumber)
-    <h4>Doğrulama kodunu girin</h4>
+    <h4>Add a phone number.</h4>
     <h5>@ViewBag.Status</h5>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Gönder" />
+            <input type="submit" class="btn btn-default" value="Submit" />
         </div>
     </div>
 }

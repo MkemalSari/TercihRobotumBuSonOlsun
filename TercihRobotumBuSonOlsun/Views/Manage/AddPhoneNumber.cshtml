@@ -1,6 +1,6 @@
-﻿@model TercihRobotumBuSonOlsun.Models.AddPhoneNumberViewModel
+﻿@model IdentitySample.Models.AddPhoneNumberViewModel
 @{
-    ViewBag.Title = "Telefon Numarası";
+    ViewBag.Title = "Add Phone Number";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -8,7 +8,7 @@
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Telefon numarası ekle</h4>
+    <h4>Add a phone number.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Gönder" />
+            <input type="submit" class="btn btn-default" value="Send verification code" />
         </div>
     </div>
 }
