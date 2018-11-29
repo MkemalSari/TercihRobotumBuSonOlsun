@@ -236,6 +236,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MailGonder.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TercihRobotumBuSonOlsun.Models;
 
 namespace IdentitySample.Controllers
 {
@@ -97,10 +98,11 @@ namespace IdentitySample.Controllers
             {
                 return View("Error");
             }
+            //Güvenlik mailinin yollandığı yer
             var user = await UserManager.FindByIdAsync(await SignInManager.GetVerifiedUserIdAsync());
             if (user != null)
             {
-                ViewBag.Status = "For DEMO purposes the current " + provider + " code is: " + await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
+                 await UserManager.GenerateTwoFactorTokenAsync(user.Id, provider);
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
@@ -152,11 +154,13 @@ namespace IdentitySample.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {
+                {   //Onay Mailini Yolladığımız blok
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
+                     await UserManager.SendEmailAsync(user.Id, "Tercih Robotum | Onay Kodu", "Lütfen bağlantıya tıklayarak üyeliğinizi onaylayınız : " + callbackUrl);
+
+                    //  ViewBag.Link = callbackUrl;
+                   // MailGonder.MailSender("Please confirm your account by clicking this link: " + callbackUrl, user.Email);
                     return View("DisplayEmail");
                 }
                 AddErrors(result);

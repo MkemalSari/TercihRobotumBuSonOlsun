@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
+using System.Net.Mail;
 
 namespace IdentitySample.Models
 {
@@ -53,8 +54,8 @@ namespace IdentitySample.Models
             });
             manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
             {
-                Subject = "SecurityCode",
-                BodyFormat = "Your security code is {0}"
+                Subject = "Tercih Robotum | Güvenlik Kodu",
+                BodyFormat = "Güvenlik Kodunuz: {0}"
             });
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
@@ -87,7 +88,15 @@ namespace IdentitySample.Models
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+
+
+            // Plug in your email service here to send an email.
+            SmtpClient client = new SmtpClient();
+            return client.SendMailAsync("onlybrave3@gmail.com",
+                                        message.Destination,
+                                        message.Subject,
+                                        message.Body);
+           // return Task.FromResult(0);
         }
     }
 

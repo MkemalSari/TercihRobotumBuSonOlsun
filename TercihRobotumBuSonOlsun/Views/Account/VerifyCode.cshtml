@@ -1,6 +1,6 @@
 ﻿@model IdentitySample.Models.VerifyCodeViewModel
 @{
-    ViewBag.Title = "Enter Verification Code";
+    ViewBag.Title = "Doğrulama Kodunuzu Giriniz";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -12,9 +12,12 @@
     @Html.Hidden("rememberMe", @Model.RememberMe)
     <h4>@ViewBag.Status</h4>
     <hr />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+    <div class="form-group row">
+        @*@Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })*@
+        <div class = "col-md-1">
+            <p class="text-center">Kodunuz:</p>
+        </div>
+        <div class="col-md-11">
             @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
         </div>
     </div>
@@ -22,13 +25,13 @@
         <div class="col-md-offset-2 col-md-10">
             <div class="checkbox">
                 @Html.CheckBoxFor(m => m.RememberBrowser)
-                @Html.LabelFor(m => m.RememberBrowser)
+                 Bu tarayıcıyı hatırla?
             </div>
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Submit" />
+            <input type="submit" class="btn btn-default" value="Gönder" />
         </div>
     </div>
 }
