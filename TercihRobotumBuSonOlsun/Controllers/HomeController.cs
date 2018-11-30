@@ -134,5 +134,17 @@ namespace IdentitySample.Controllers
 
             return View();
         }
+        public ActionResult Giris()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Uyelik()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

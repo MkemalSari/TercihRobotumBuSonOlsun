@@ -1,0 +1,74 @@
+﻿<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+@model IdentitySample.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+    <div class="row">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+       
+        
+            <div class="card">
+                <article class="card-body">
+                    @Html.ActionLink("Üye Ol", "Register", null, new { @class = "float-right btn btn-outline-primary" })
+                    @*<a href="" class="float-right btn btn-outline-primary">Üye Ol</a>*@
+                    <h4 class="card-title mb-4 mt-1">Üyelik Giriş</h4>
+                    @Html.Partial("_ExternalLoginsListPartial", new IdentitySample.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    <p>
+
+                        <a href="" class="btn btn-block btn-outline-primary"><i class="fab fa-facebook-f"></i>&nbsp;  Facebook İle Giriş  </a>
+                    </p>
+                    <p>
+
+                        <a href="" class="btn btn-block btn-outline-primary"><i class="fab fa-google"></i> &nbsp;  Google İle Giriş  </a>
+                    </p>
+                    <hr>
+                    <form>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", placeholder = "Mail" })
+                        </div> <!-- form-group// -->
+                        <div class="form-group">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", placeholder = "******" })
+                        </div> <!-- form-group// -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
+                                    </div> <!-- checkbox .// -->
+                                </div> <!-- form-group// -->
+
+                            </div>
+
+                            <div class="col-md-6 text-right">
+                                @Html.ActionLink("Şifremi Unuttum?", "ForgotPassword")
+                                @*<a class="small" href="#">Şifremi Unuttum?</a>*@
+                            </div>
+
+                        </div> <!-- .row// -->
+                        <div class="form-group">
+                            <input type="submit" value="Giriş" class="btn btn-primary btn-block"/>
+                        </div> <!-- form-group// -->
+                    </form>
+                </article>
+            </div> <!-- card.// -->
+        <!-- col.// -->
+}
+       
+
+    </div> <!-- row.// -->
+
+    <!--container end.//-->
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

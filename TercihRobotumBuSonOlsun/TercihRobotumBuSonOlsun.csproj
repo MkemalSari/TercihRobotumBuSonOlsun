@@ -358,6 +358,8 @@
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Veri\Tablo2LisansYKS2018.xlsx" />
     <Content Include="Veri\testTablo.xlsx" />
+    <Content Include="Views\Account\LoginTema.cshtml" />
+    <Content Include="Views\Home\Uyelik.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
