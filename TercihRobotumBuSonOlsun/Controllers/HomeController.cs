@@ -5,15 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using TercihimNihaiProje.Models;
+using TercihRobotumBuSonOlsun.Models;
 
 namespace IdentitySample.Controllers
 {
     public class HomeController : Controller
     {
+        TercihListemModel tercihListem = new TercihListemModel();
+        
         List<MyViewModel> localList = new List<MyViewModel>();
         [HttpGet]
         public ActionResult Index(string sortOrder, string aramaMetni, string currentFilter, int? page)
         {
+            tercihListem.Id = 1;
+            tercihListem.ad = "Yks Liste 1";
+
             ViewBag.SortingKodaGore = String.IsNullOrEmpty(sortOrder) ? "Koda_Gore" : "";
             ViewBag.SortingAdaGore = String.IsNullOrEmpty(sortOrder) ? "Ada_Gore" : "";
             ViewBag.SortingPuanTuruneGore = String.IsNullOrEmpty(sortOrder) ? "Puan_Turune_Gore" : "";
@@ -21,7 +27,7 @@ namespace IdentitySample.Controllers
             ViewBag.SortingYerleseneGore = String.IsNullOrEmpty(sortOrder) ? "Yerlesene_Gore" : "";
             ViewBag.SortingEnKucukPuanaGore = String.IsNullOrEmpty(sortOrder) ? "En_Kucuk_Puana_Gore" : "";
             ViewBag.SortingEnBuyukPuanaGore = String.IsNullOrEmpty(sortOrder) ? "En_Buyuk_Puana_Gore" : "";
-
+            
             ViewBag.CurrentSort = sortOrder;
             if (aramaMetni != null)
             { page = 1; }
@@ -117,7 +123,17 @@ namespace IdentitySample.Controllers
 
             return View(localList.ToPagedList(pageNumber, pageSize));
         }
+        [HttpPost]
+        [Authorize]
+        public ActionResult Index(MyViewModel model) {
 
+            ViewBag.data = model;
+            
+           string test = model.ProgramKodu;
+            return View();
+
+            
+        }
         [HttpGet]
         [Authorize]
         public ActionResult About()
@@ -145,6 +161,22 @@ namespace IdentitySample.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        [Authorize]
+      
+        public ActionResult Ekle(string myModel)
+        {
+
+            string test = localList.Where(a => a.ProgramKodu == myModel).ToString();
+
+            return RedirectToAction("Index", "Home");
+            
+           
+             // return View();
+        }
+        public void EkleDeneme(string myModel)
+        {
+            // your code           
         }
     }
 }

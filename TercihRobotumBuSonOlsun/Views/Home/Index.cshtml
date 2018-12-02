@@ -1,4 +1,5 @@
 ﻿@model PagedList.IPagedList<TercihimNihaiProje.Models.MyViewModel>
+
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Home Page";
@@ -225,16 +226,27 @@
                 @* Tablo Verilerini Çektiğim Yer  *@
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td> <input class="btn btn-primary" type="button" name="@item.ProgramKodu" value="+" /></td>
-                        <td>@item.ProgramKodu</td>
-                        <td>@item.ProgramAdi  </td>
-                        <td>@item.PuanTuru   </td>
-                        <td>@item.Kontenjan   </td>
-                        <td>@item.Yerlesen    </td>
-                        <td>@item.EnKucukPuan</td>
-                        <td>@item.EnBuyukPuan</td>
-                    </tr>
+                <tr>
+                    @using (Html.BeginForm("Ekle", "Home", FormMethod.Post, new { id = "ekleForm", @class = "navbar-right" }))
+                    {
+                    @Html.AntiForgeryToken()
+                    <td>
+
+                        <a href="@Url.Action("EkleDeneme", "Home", new {myModel=item.ProgramKodu })" title="Add">
+                           +
+                        </a>
+                       
+
+                    </td>
+                    }
+                    <td>@item.ProgramKodu</td>
+                    <td>@item.ProgramAdi  </td>
+                    <td>@item.PuanTuru   </td>
+                    <td>@item.Kontenjan   </td>
+                    <td>@item.Yerlesen    </td>
+                    <td>@item.EnKucukPuan</td>
+                    <td>@item.EnBuyukPuan</td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -263,6 +275,17 @@
         </div>
     </div>
 
-
+    @Url.Action()
 
 </div>
+<script>
+    function Deneme() {
+        $.ajax({
+            url: '@Url.Action("Ekle","Home")',
+            type: 'POST',
+            data: { movieName: $('#BtnDeneme').val() },
+        }).done(function () {
+            alert('Modify Movie');
+        });
+    }
+</script>
