@@ -1,0 +1,83 @@
+﻿@model TercihimNihaiProje.Models.MyViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MyViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TercihListemModel.ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TercihListemModel.ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramKodu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramKodu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PuanTuru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PuanTuru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kontenjan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kontenjan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Yerlesen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yerlesen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnKucukPuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnKucukPuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnBuyukPuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnBuyukPuan)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

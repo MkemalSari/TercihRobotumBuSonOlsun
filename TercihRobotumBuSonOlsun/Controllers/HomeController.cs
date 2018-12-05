@@ -3,6 +3,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web.Mvc;
 using TercihimNihaiProje.Models;
 using TercihRobotumBuSonOlsun.Models;
@@ -14,9 +15,11 @@ namespace IdentitySample.Controllers
         TercihListemModel tercihListem = new TercihListemModel();
         
         List<MyViewModel> localList = new List<MyViewModel>();
+      
         [HttpGet]
         public ActionResult Index(string sortOrder, string aramaMetni, string currentFilter, int? page)
         {
+           
             tercihListem.Id = 1;
             tercihListem.ad = "Yks Liste 1";
 
@@ -35,11 +38,10 @@ namespace IdentitySample.Controllers
             { aramaMetni = currentFilter; }
             ViewBag.CurrentFilter = aramaMetni;
 
-
-            string fileName = Server.MapPath("~/veri/Tablo2LisansYKS2018.xlsx");
-
-
-            using (var excelWorkbook = new XLWorkbook(fileName))
+            if (this.Request.RequestType != "POST")
+            {
+                string fileName = Server.MapPath("~/veri/Tablo2LisansYKS2018.xlsx");
+                using (var excelWorkbook = new XLWorkbook(fileName))
             {
                 var nonEmptyDataRows = excelWorkbook.Worksheet(1).RowsUsed();
 
@@ -84,6 +86,11 @@ namespace IdentitySample.Controllers
 
 
             }
+            }
+           
+
+
+          
             if (!String.IsNullOrEmpty(aramaMetni))
             {
                 localList = localList.Where(s => s.ProgramAdi.ToLower().Contains(aramaMetni.ToLower()) ||
@@ -177,6 +184,12 @@ namespace IdentitySample.Controllers
         public void EkleDeneme(string myModel)
         {
             // your code           
+        }
+        private TercihContext context = new TercihContext();
+        public ActionResult TercihListem()
+        {
+
+            return View(context.TercihListesi.ToList());
         }
     }
 }

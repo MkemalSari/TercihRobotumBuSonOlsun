@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using TercihRobotumBuSonOlsun.Models;
 
 namespace TercihimNihaiProje.Models
 {
     public class MyViewModel
     {
-
+        public int Id { get; set; }
         public string ProgramKodu { get; set; }
         public string ProgramAdi { get; set; }
         public string PuanTuru { get; set; }
@@ -15,5 +12,9 @@ namespace TercihimNihaiProje.Models
         public string Yerlesen { get; set; }
         public string EnKucukPuan { get; set; }
         public string EnBuyukPuan { get; set; }
+
+
+        public int TercihListemModelId { get; set; }
+        public TercihListemModel TercihListemModel { get; set; }
     }
 }
