@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TercihRobotumBuSonOlsun.Models;
 using TercihimNihaiProje.Models;
 using Microsoft.AspNet.Identity;
+using Rotativa;
 
 namespace TercihRobotumBuSonOlsun.Controllers
 {
@@ -16,7 +17,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
     public class MyListController : Controller
     {
         private TercihContext db = new TercihContext();
-
+        
         // GET: MyList
         public ActionResult Index()
         {
@@ -125,20 +126,14 @@ namespace TercihRobotumBuSonOlsun.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult PdfCikart(int? id)
+        public ActionResult TercihListemPdf()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MyViewModel myViewModel = db.Tercihler.Find(id);
-            if (myViewModel == null)
-            {
-                return HttpNotFound();
-            }
-            db.Tercihler.Remove(myViewModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var userId = User.Identity.GetUserId();
+            var list = db.Tercihler.Where(a => a.UserlId == userId).OrderByDescending(a => a.EnBuyukPuan).ToList();
+            ViewAsPdf pdf = new ViewAsPdf("GeneratePDF", list);
+            
+            return pdf;
+            
         }
 
         // POST: MyList/Delete/5
