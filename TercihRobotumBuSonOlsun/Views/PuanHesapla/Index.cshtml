@@ -1,0 +1,90 @@
+﻿@model TercihRobotumBuSonOlsun.Models.PuanHesaplaModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Puan Hesapla</h2>
+
+@using (Html.BeginForm("Index", "PuanHesapla", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <p>Diploma Notu:</p>
+    @Html.TextBoxFor(model => model.diplomaNotu, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.diplomaNotu)
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Türkçe(40)</th>
+                <th scope="col">Sosyal(20)</th>
+                <th scope="col">Matematik(40)</th>
+                <th scope="col">Fen(20)</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th scope="row">
+                    Doğru
+                </th>
+                <td>
+                    @Html.TextBoxFor(model => model.turkceDogru, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.turkceDogru)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.sosyalDogru, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.sosyalDogru)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.matematikDogru, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.matematikDogru)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.fenDogru, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.fenDogru)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Yanlış</th>
+                <td>
+                    @Html.TextBoxFor(model => model.turkceYanlis, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.turkceYanlis)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.sosyalYanlis, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.sosyalYanlis)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.matematikYanlis, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.matematikYanlis)
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model.fenYanlis, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.fenYanlis)
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Net</th>
+                <td>@ViewData["turkceNet"]</td>
+                <td>@ViewData["sosyalNet"]</td>
+                <td>@ViewData["matematikNet"]</td>
+                <td>@ViewData["fenNet"]</td>
+            </tr>
+        </tbody>
+
+    </table>
+    <p>TYT Puanınız: @ViewData["tytPuan"]</p>
+
+
+
+    <input type="submit" name="Sumit" value="Hesapla" formmethod="post" class="btn btn-primary" />
+}
+
+
+
+
+
+

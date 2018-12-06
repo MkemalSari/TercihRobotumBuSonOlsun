@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<TercihimNihaiProje.Models.MyViewModel>
+﻿@model PagedList.IPagedList<TercihRobotumBuSonOlsun.Models.TercihVeriModel>
 
 @using PagedList.Mvc;
 @{
@@ -232,7 +232,7 @@
                     @Html.AntiForgeryToken()
                     <td>
 
-                        <a href="@Url.Action("Ekle", "Home", new {ProgramKodu=item.ProgramKodu,ProgramAdi=item.ProgramAdi,PuanTuru=item.PuanTuru,Kontenjan=item.Kontenjan,Yerlesen=item.Yerlesen,EnKucukPuan=item.EnKucukPuan,EnBuyukPuan=item.EnBuyukPuan})" title="Add">
+                        <a class="btn btn-primary" href="@Url.Action("Ekle", "Home", new {ProgramKodu=item.ProgramKodu,ProgramAdi=item.ProgramAdi,PuanTuru=item.PuanTuru,Kontenjan=item.Kontenjan,Yerlesen=item.Yerlesen,EnKucukPuan=item.EnKucukPuan,EnBuyukPuan=item.EnBuyukPuan})" title="Add">
                            +
                         </a>
                        

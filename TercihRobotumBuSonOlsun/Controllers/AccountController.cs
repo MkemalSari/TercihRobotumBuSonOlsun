@@ -155,11 +155,7 @@ namespace IdentitySample.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {   //Onay Mailini Yolladığımız blok
-                    TercihListemModel tercihListem = new TercihListemModel();
-                    TercihContext db = new TercihContext();
-                    tercihListem.UserId = user.Id;
-                    db.TercihListesi.Add(tercihListem);
-                    db.SaveChanges();
+                   
                     
 
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

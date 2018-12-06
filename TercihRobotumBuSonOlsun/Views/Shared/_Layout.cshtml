@@ -22,13 +22,14 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">@Html.ActionLink("Giriş Sayfası", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Puan Hesaplama", "About", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Tercih Listem", "Contact", "Home", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Puan Hesaplama", "Index", "PuanHesapla", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Tercih Listem", "Index", "MyList", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                  {
-                         <li>@Html.ActionLink("Rol Kontrol", "Index", "RolesAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
-                           <li>@Html.ActionLink("Kullanıcı Kontrol", "Index", "UsersAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
-                }
+    {
+            <li>@Html.ActionLink("Rol Kontrol", "Index", "RolesAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Kullanıcı Kontrol", "Index", "UsersAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+            <li>@Html.ActionLink("Dosya Kontrol", "DosyaEkle", "UsersAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link" })</li>
+}
             </ul>
             @Html.Partial("_LoginPartial")
 

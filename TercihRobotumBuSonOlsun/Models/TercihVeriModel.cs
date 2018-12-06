@@ -1,9 +1,13 @@
-﻿using TercihRobotumBuSonOlsun.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace TercihimNihaiProje.Models
+namespace TercihRobotumBuSonOlsun.Models
 {
-    public class MyViewModel
+    public class TercihVeriModel
     {
+
         public int Id { get; set; }
         public string ProgramKodu { get; set; }
         public string ProgramAdi { get; set; }
@@ -12,7 +16,6 @@ namespace TercihimNihaiProje.Models
         public string Yerlesen { get; set; }
         public string EnKucukPuan { get; set; }
         public string EnBuyukPuan { get; set; }
-        public string UserlId { get; set; }
-       
+        
     }
 }

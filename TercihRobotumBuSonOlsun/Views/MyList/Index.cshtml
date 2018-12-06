@@ -3,17 +3,18 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int sayac = 0;
 }
 
-<h2>Index</h2>
+<h2>Tercih Listem</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Pdf Olarak Çıkart", "Sil", new {}, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TercihListemModel.UserId)
+            Sıra
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProgramKodu)
@@ -36,13 +37,18 @@
         <th>
             @Html.DisplayNameFor(model => model.EnBuyukPuan)
         </th>
-        <th></th>
+
+        <th>
+            Sil
+        </th>
     </tr>
 
 @foreach (var item in Model) {
+
+    sayac++;
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TercihListemModel.UserId)
+            @sayac
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProgramKodu)
@@ -65,10 +71,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.EnBuyukPuan)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+
+            @Html.ActionLink("Sil", "Sil", new { id = item.Id }, new { @class = "btn btn-danger" })
         </td>
     </tr>
 }

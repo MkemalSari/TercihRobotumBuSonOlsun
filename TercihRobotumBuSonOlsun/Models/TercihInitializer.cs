@@ -11,20 +11,10 @@ namespace TercihRobotumBuSonOlsun.Models
     {
         protected override void Seed(TercihContext context)
         {
-            List<TercihListemModel> tercihListems = new List<TercihListemModel>()
-            {
-                new TercihListemModel() {}
-                
-            };
-            foreach (var item in tercihListems)
-            {
-                context.TercihListesi.Add(item);
-            }
-            context.SaveChanges();
-
+           
             List<MyViewModel> tercihler = new List<MyViewModel>()
             {
-                new MyViewModel(){ProgramKodu="11111111",ProgramAdi="sdü bilgisayar",PuanTuru="mf",Kontenjan="15",Yerlesen="10",EnKucukPuan="250",EnBuyukPuan="350",TercihListemModelId=1}
+                new MyViewModel(){ProgramKodu="11111111",ProgramAdi="sdü bilgisayar",PuanTuru="mf",Kontenjan="15",Yerlesen="10",EnKucukPuan="250",EnBuyukPuan="350",UserlId="deneme"}
             };
 
             foreach (var item in tercihler)
@@ -32,6 +22,18 @@ namespace TercihRobotumBuSonOlsun.Models
                 context.Tercihler.Add(item);
             }
             context.SaveChanges();
+            List<TercihVeriModel> tercihVerileri = new List<TercihVeriModel>()
+            {
+                new TercihVeriModel(){ProgramKodu="11111111",ProgramAdi="sdü bilgisayar",PuanTuru="mf",Kontenjan="15",Yerlesen="10",EnKucukPuan="250",EnBuyukPuan="350"}
+            };
+
+            foreach (var item in tercihVerileri)
+            {
+                context.TercihVerileri.Add(item);
+            }
+            context.SaveChanges();
+
+
 
             base.Seed(context);
         }

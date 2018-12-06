@@ -1,4 +1,5 @@
-﻿using IdentitySample.Models;
+﻿using ClosedXML.Excel;
+using IdentitySample.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Linq;
@@ -6,6 +7,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TercihimNihaiProje.Models;
+using TercihRobotumBuSonOlsun.Models;
 
 namespace IdentitySample.Controllers
 {
@@ -236,6 +239,93 @@ namespace IdentitySample.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        
+        public ActionResult DosyaEkle(HttpPostedFileBase excelFile)
+        {
+            if (excelFile == null
+             || excelFile.ContentLength == 0)
+            {
+                ViewBag.Error = "Lütfen dosya seçimi yapınız.";
+
+                return View();
+            }
+            else
+            {
+                if (excelFile.FileName.EndsWith("xls")
+               || excelFile.FileName.EndsWith("xlsx"))
+                {
+                    //Seçilen dosyanın nereye kaydedileceği belirtiliyor.
+                    string path = Server.MapPath("~/Veri/" + excelFile.FileName);
+
+                    //Dosya kontrol edilir, varsa silinir.
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    //Excel path altına kaydedilir.
+                    excelFile.SaveAs(path);
+
+                    using (var excelWorkbook = new XLWorkbook(path))
+                    {
+                        var nonEmptyDataRows = excelWorkbook.Worksheet(1).RowsUsed();
+
+
+                        foreach (var dataRow in nonEmptyDataRows)
+                        {
+                            TercihContext tercihContext = new TercihContext();
+                            //for row number check
+                            TercihVeriModel model = new TercihVeriModel();
+                            if (dataRow.RowNumber() > 1 && dataRow.Cell(1).Value.ToString() != "Program Kodu"
+                                && dataRow.Cell(1).Value.ToString() != "TABLO-4 Merkezi Yerleştirme İle Öğrenci Alan Yükseköğretim Lisans Programları"
+                                && dataRow.Cell(1).Value.ToString() != ""
+                                )
+                            {   //TAblo verileribi Gönderdiğim Yer
+                                model.ProgramKodu = dataRow.Cell(1).Value.ToString();
+                                model.ProgramAdi = dataRow.Cell(2).Value.ToString();
+                                model.PuanTuru = dataRow.Cell(3).Value.ToString();
+                                model.Kontenjan = dataRow.Cell(4).Value.ToString();
+                                model.Yerlesen = dataRow.Cell(5).Value.ToString();
+                                if (dataRow.Cell(6).Value.ToString() == "--")
+                                {
+                                    model.EnKucukPuan = "0";
+                                }
+                                else
+                                {
+                                    model.EnKucukPuan = dataRow.Cell(6).Value.ToString();
+                                }
+                                if (dataRow.Cell(7).Value.ToString() == "--")
+                                {
+                                    model.EnBuyukPuan = "0";
+                                }
+                                else
+                                {
+                                    model.EnBuyukPuan = dataRow.Cell(7).Value.ToString();
+                                }
+
+
+                                tercihContext.TercihVerileri.Add(model);
+                                tercihContext.SaveChanges();
+                            }
+
+                        }
+
+
+                    }
+
+
+
+
+
+
+
+                }
+
+                return View();
+            }
+
         }
     }
 }

@@ -13,9 +13,9 @@ namespace IdentitySample.Controllers
 {
     public class HomeController : Controller
     {
-      
-        
-        List<MyViewModel> localList = new List<MyViewModel>();
+
+        TercihContext tercihContext = new TercihContext();
+        List<TercihVeriModel> localList = new List<TercihVeriModel>();
       
         [HttpGet]
         public ActionResult Index(string sortOrder, string aramaMetni, string currentFilter, int? page)
@@ -39,57 +39,56 @@ namespace IdentitySample.Controllers
             { aramaMetni = currentFilter; }
             ViewBag.CurrentFilter = aramaMetni;
 
-            if (this.Request.RequestType != "POST")
-            {
-                string fileName = Server.MapPath("~/veri/Tablo2LisansYKS2018.xlsx");
-                using (var excelWorkbook = new XLWorkbook(fileName))
-            {
-                var nonEmptyDataRows = excelWorkbook.Worksheet(1).RowsUsed();
-
-
-                foreach (var dataRow in nonEmptyDataRows)
-                {
-                    MyViewModel model = new MyViewModel();
-                    //for row number check
-
-                    if (dataRow.RowNumber() > 1 && dataRow.Cell(1).Value.ToString() != "Program Kodu"
-                        && dataRow.Cell(1).Value.ToString() != "TABLO-4 Merkezi Yerleştirme İle Öğrenci Alan Yükseköğretim Lisans Programları"
-                        && dataRow.Cell(1).Value.ToString() != ""
-                        )
-                    {   //TAblo verileribi Gönderdiğim Yer
-                        model.ProgramKodu = dataRow.Cell(1).Value.ToString();
-                        model.ProgramAdi = dataRow.Cell(2).Value.ToString();
-                        model.PuanTuru = dataRow.Cell(3).Value.ToString();
-                        model.Kontenjan = dataRow.Cell(4).Value.ToString();
-                        model.Yerlesen = dataRow.Cell(5).Value.ToString();
-                        if (dataRow.Cell(6).Value.ToString() == "--")
-                        {
-                            model.EnKucukPuan = "0";
-                        }
-                        else
-                        {
-                            model.EnKucukPuan = dataRow.Cell(6).Value.ToString();
-                        }
-                        if (dataRow.Cell(7).Value.ToString() == "--")
-                        {
-                            model.EnBuyukPuan = "0";
-                        }
-                        else
-                        {
-                            model.EnBuyukPuan = dataRow.Cell(7).Value.ToString();
-                        }
-
-
-                        localList.Add(model);
-                    }
-
-                }
-
-
-            }
-            }
            
+                string fileName = Server.MapPath("~/veri/Tablo2LisansYKS2018.xlsx");
+            //    using (var excelWorkbook = new XLWorkbook(fileName))
+            //{
+            //    var nonEmptyDataRows = excelWorkbook.Worksheet(1).RowsUsed();
 
+
+            //    foreach (var dataRow in nonEmptyDataRows)
+            //    {
+            //        MyViewModel model = new MyViewModel();
+            //        //for row number check
+
+            //        if (dataRow.RowNumber() > 1 && dataRow.Cell(1).Value.ToString() != "Program Kodu"
+            //            && dataRow.Cell(1).Value.ToString() != "TABLO-4 Merkezi Yerleştirme İle Öğrenci Alan Yükseköğretim Lisans Programları"
+            //            && dataRow.Cell(1).Value.ToString() != ""
+            //            )
+            //        {   //TAblo verileribi Gönderdiğim Yer
+            //            model.ProgramKodu = dataRow.Cell(1).Value.ToString();
+            //            model.ProgramAdi = dataRow.Cell(2).Value.ToString();
+            //            model.PuanTuru = dataRow.Cell(3).Value.ToString();
+            //            model.Kontenjan = dataRow.Cell(4).Value.ToString();
+            //            model.Yerlesen = dataRow.Cell(5).Value.ToString();
+            //            if (dataRow.Cell(6).Value.ToString() == "--")
+            //            {
+            //                model.EnKucukPuan = "0";
+            //            }
+            //            else
+            //            {
+            //                model.EnKucukPuan = dataRow.Cell(6).Value.ToString();
+            //            }
+            //            if (dataRow.Cell(7).Value.ToString() == "--")
+            //            {
+            //                model.EnBuyukPuan = "0";
+            //            }
+            //            else
+            //            {
+            //                model.EnBuyukPuan = dataRow.Cell(7).Value.ToString();
+            //            }
+
+
+            //            localList.Add(model);
+            //        }
+
+            //    }
+
+
+            //}
+
+
+            localList = tercihContext.TercihVerileri.ToList();
 
           
             if (!String.IsNullOrEmpty(aramaMetni))
@@ -133,7 +132,7 @@ namespace IdentitySample.Controllers
         }
         [HttpPost]
         [Authorize]
-        public ActionResult Index(MyViewModel model) {
+        public ActionResult Index(TercihVeriModel model) {
 
             ViewBag.data = model;
             
@@ -178,7 +177,6 @@ namespace IdentitySample.Controllers
             MyViewModel model = new MyViewModel();
 
             TercihContext tercihDb = new TercihContext();
-            var tercihListesi = tercihDb.TercihListesi.First(a => a.UserId == userId);
 
             model.ProgramKodu = ProgramKodu;
             model.ProgramAdi = ProgramAdi;
@@ -187,7 +185,7 @@ namespace IdentitySample.Controllers
             model.Yerlesen = Yerlesen;
             model.EnKucukPuan = EnKucukPuan;
             model.EnBuyukPuan = EnBuyukPuan;
-            model.TercihListemModelId = tercihListesi.Id;
+            model.UserlId = userId;
             tercihDb.Tercihler.Add(model);
             tercihDb.SaveChanges();
 
@@ -200,11 +198,11 @@ namespace IdentitySample.Controllers
         {
             // your code           
         }
-        private TercihContext context = new TercihContext();
+       
         public ActionResult TercihListem()
         {
 
-            return View(context.TercihListesi.ToList());
+            return View();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace TercihRobotumBuSonOlsun.Models
         }
 
         public DbSet< MyViewModel> Tercihler { get; set; }
-        public DbSet<TercihListemModel> TercihListesi { get; set; }
+        public DbSet<TercihVeriModel> TercihVerileri { get; set; }
+
     }
 }
