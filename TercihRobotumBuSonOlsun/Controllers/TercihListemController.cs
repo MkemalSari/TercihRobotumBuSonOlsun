@@ -46,7 +46,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ad")] TercihListemModel tercihListemModel)
+        public ActionResult Create([Bind(Include = "Id")] TercihListemModel tercihListemModel)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
         // daha fazla bilgi için https://go.microsoft.com/fwlink/?LinkId=317598 sayfasına bakın.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ad")] TercihListemModel tercihListemModel)
+        public ActionResult Edit([Bind(Include = "Id")] TercihListemModel tercihListemModel)
         {
             if (ModelState.IsValid)
             {

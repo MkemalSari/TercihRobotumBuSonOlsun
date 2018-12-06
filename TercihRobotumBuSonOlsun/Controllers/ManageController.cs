@@ -84,6 +84,7 @@ namespace IdentitySample.Controllers
                 var user = await UserManager.FindByIdAsync(userId);
                 if (user != null)
                 {
+                    
                     await SignInAsync(user, isPersistent: false);
                 }
                 message = ManageMessageId.RemoveLoginSuccess;

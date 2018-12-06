@@ -13,10 +13,8 @@ namespace TercihRobotumBuSonOlsun.Models
         {
             List<TercihListemModel> tercihListems = new List<TercihListemModel>()
             {
-                new TercihListemModel() {ad="111111111" },
-                 new TercihListemModel() {ad="111111112" },
-                  new TercihListemModel() {ad="111111113" },
-                   new TercihListemModel() {ad="111111114" }
+                new TercihListemModel() {}
+                
             };
             foreach (var item in tercihListems)
             {

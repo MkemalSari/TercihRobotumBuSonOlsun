@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using TercihimNihaiProje.Models;
 
 namespace TercihRobotumBuSonOlsun.Models
@@ -7,9 +8,11 @@ namespace TercihRobotumBuSonOlsun.Models
     {
       
         public int  Id { get; set; }
-        public string ad { get; set; }
+        public string UserId { get; set; }
+       
 
-       List<MyViewModel> Tercihler { get; set; }
+      
+        List<MyViewModel> Tercihler { get; set; }
 
     }
 }

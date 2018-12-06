@@ -232,7 +232,7 @@
                     @Html.AntiForgeryToken()
                     <td>
 
-                        <a href="@Url.Action("EkleDeneme", "Home", new {myModel=item.ProgramKodu })" title="Add">
+                        <a href="@Url.Action("Ekle", "Home", new {ProgramKodu=item.ProgramKodu,ProgramAdi=item.ProgramAdi,PuanTuru=item.PuanTuru,Kontenjan=item.Kontenjan,Yerlesen=item.Yerlesen,EnKucukPuan=item.EnKucukPuan,EnBuyukPuan=item.EnBuyukPuan})" title="Add">
                            +
                         </a>
                        

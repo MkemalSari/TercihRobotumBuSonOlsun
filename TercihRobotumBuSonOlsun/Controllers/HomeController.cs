@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNet.Identity;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace IdentitySample.Controllers
 {
     public class HomeController : Controller
     {
-        TercihListemModel tercihListem = new TercihListemModel();
+      
         
         List<MyViewModel> localList = new List<MyViewModel>();
       
@@ -20,8 +21,8 @@ namespace IdentitySample.Controllers
         public ActionResult Index(string sortOrder, string aramaMetni, string currentFilter, int? page)
         {
            
-            tercihListem.Id = 1;
-            tercihListem.ad = "Yks Liste 1";
+          
+            
 
             ViewBag.SortingKodaGore = String.IsNullOrEmpty(sortOrder) ? "Koda_Gore" : "";
             ViewBag.SortingAdaGore = String.IsNullOrEmpty(sortOrder) ? "Ada_Gore" : "";
@@ -171,10 +172,24 @@ namespace IdentitySample.Controllers
         }
         [Authorize]
       
-        public ActionResult Ekle(string myModel)
+        public ActionResult Ekle(string ProgramKodu, string ProgramAdi, string PuanTuru, string Kontenjan, string Yerlesen, string EnKucukPuan, string EnBuyukPuan)
         {
+          var userId=  User.Identity.GetUserId();
+            MyViewModel model = new MyViewModel();
 
-            string test = localList.Where(a => a.ProgramKodu == myModel).ToString();
+            TercihContext tercihDb = new TercihContext();
+            var tercihListesi = tercihDb.TercihListesi.First(a => a.UserId == userId);
+
+            model.ProgramKodu = ProgramKodu;
+            model.ProgramAdi = ProgramAdi;
+            model.PuanTuru = PuanTuru;
+            model.Kontenjan = Kontenjan;
+            model.Yerlesen = Yerlesen;
+            model.EnKucukPuan = EnKucukPuan;
+            model.EnBuyukPuan = EnBuyukPuan;
+            model.TercihListemModelId = tercihListesi.Id;
+            tercihDb.Tercihler.Add(model);
+            tercihDb.SaveChanges();
 
             return RedirectToAction("Index", "Home");
             

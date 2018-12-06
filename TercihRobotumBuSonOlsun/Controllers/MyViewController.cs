@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TercihRobotumBuSonOlsun.Models;
 using TercihimNihaiProje.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TercihRobotumBuSonOlsun.Controllers
 {
@@ -18,7 +19,10 @@ namespace TercihRobotumBuSonOlsun.Controllers
         // GET: MyView
         public ActionResult Index()
         {
-            var tercihler = db.Tercihler.Include(m => m.TercihListemModel);
+            var userId = User.Identity.GetUserId();
+            
+
+            var tercihler = db.Tercihler.Where(m => m.TercihListemModel.UserId==userId);
             return View(tercihler.ToList());
         }
 
@@ -40,7 +44,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
         // GET: MyView/Create
         public ActionResult Create()
         {
-            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "ad");
+            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "UserId");
             return View();
         }
 
@@ -58,7 +62,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "ad", myViewModel.TercihListemModelId);
+            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "UserId", myViewModel.TercihListemModelId);
             return View(myViewModel);
         }
 
@@ -74,7 +78,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "ad", myViewModel.TercihListemModelId);
+            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "UserId", myViewModel.TercihListemModelId);
             return View(myViewModel);
         }
 
@@ -91,7 +95,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "ad", myViewModel.TercihListemModelId);
+            ViewBag.TercihListemModelId = new SelectList(db.TercihListesi, "Id", "UserId", myViewModel.TercihListemModelId);
             return View(myViewModel);
         }
 
