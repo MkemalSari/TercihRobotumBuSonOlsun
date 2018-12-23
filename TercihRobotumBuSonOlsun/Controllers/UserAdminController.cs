@@ -7,7 +7,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using TercihimNihaiProje.Models;
 using TercihRobotumBuSonOlsun.Models;
 
 namespace IdentitySample.Controllers

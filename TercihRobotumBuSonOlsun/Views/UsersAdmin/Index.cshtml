@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Yeni Kullanıcı Oluştur", "Create")
+    @Html.ActionLink("Yeni Kullanıcı Oluştur", "Create",null, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -27,9 +27,9 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detaylar", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Detaylar", "Details", new { id = item.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

@@ -16,6 +16,11 @@ namespace TercihRobotumBuSonOlsun.Models
         public string Yerlesen { get; set; }
         public string EnKucukPuan { get; set; }
         public string EnBuyukPuan { get; set; }
-        
+
+       
+
+
+
     }
+   
 }

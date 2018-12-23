@@ -1,60 +1,90 @@
 ﻿@model IdentitySample.Models.LoginViewModel
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
 @{
-    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
 }
 
-<h2>@ViewBag.Title.</h2>
+
 <div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register a new user?", "Register")
-                </p>
-                <p>
-                    @Html.ActionLink("Forget your password?", "ForgotPassword")
-                </p>
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new IdentitySample.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+    <aside class="col-lg-4 col-sm-1 col-xl-4"> </aside>
+
+    <aside class="p-5 ">
+    
+                <div class="card">
+
+                    <article class="card-body">
+
+                        @Html.ActionLink("Üye Ol", "Register", null, new { @class = "float-right btn btn-outline-primary" })
+
+                        <h4 class="card-title mb-4 mt-1">Üyelik Giriş</h4>
+                        <p>
+                            <section id="socialLoginForm">
+                                @Html.Partial("_ExternalLoginsListPartial", new IdentitySample.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                            </section>
+
+                        </p>
+                        <hr>
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+                        @Html.AntiForgeryToken()
+
+
+
+                        <form>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Şifreniz" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                            </div> <!-- form-group// -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(m => m.RememberMe)
+                                                Beni Hatırla
+
+                                            </label>
+                                        </div> <!-- checkbox .// -->
+                                    </div> <!-- form-group// -->
+                                    <div class="form-group">
+                                        <input type="submit" formmethod="post" value="Log in" class="btn btn-primary btn-block" />
+
+                                    </div> <!-- form-group// -->
+                                </div>
+
+                                <div class="col-md-6 text-right">
+                                    @Html.ActionLink("Şifremi Unuttum.", "ForgotPassword", null, new { @class = "small" })
+
+                                </div>
+                            </div> <!-- .row// -->
+                        </form>
+}
+                        </section>
+                    </article>
+                </div> <!-- card.// -->
+            
+
+    </aside> <!-- col.// -->
+
+   
+        <aside class="col-lg-4 col-sm-1 col-xl-4"> </aside>
+
+</div> <!-- row.// -->
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

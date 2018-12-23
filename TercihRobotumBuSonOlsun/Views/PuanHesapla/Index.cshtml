@@ -1,87 +1,209 @@
 ﻿@model TercihRobotumBuSonOlsun.Models.PuanHesaplaModel
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Puan Hesapla</h2>
-
-@using (Html.BeginForm("Index", "PuanHesapla", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <p>Diploma Notu:</p>
-    @Html.TextBoxFor(model => model.diplomaNotu, new { @class = "form-control" })
-    @Html.ValidationMessageFor(model => model.diplomaNotu)
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Türkçe(40)</th>
-                <th scope="col">Sosyal(20)</th>
-                <th scope="col">Matematik(40)</th>
-                <th scope="col">Fen(20)</th>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th scope="row">
-                    Doğru
-                </th>
-                <td>
-                    @Html.TextBoxFor(model => model.turkceDogru, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.turkceDogru)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.sosyalDogru, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.sosyalDogru)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.matematikDogru, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.matematikDogru)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.fenDogru, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.fenDogru)
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Yanlış</th>
-                <td>
-                    @Html.TextBoxFor(model => model.turkceYanlis, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.turkceYanlis)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.sosyalYanlis, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.sosyalYanlis)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.matematikYanlis, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.matematikYanlis)
-                </td>
-                <td>
-                    @Html.TextBoxFor(model => model.fenYanlis, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.fenYanlis)
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Net</th>
-                <td>@ViewData["turkceNet"]</td>
-                <td>@ViewData["sosyalNet"]</td>
-                <td>@ViewData["matematikNet"]</td>
-                <td>@ViewData["fenNet"]</td>
-            </tr>
-        </tbody>
-
-    </table>
-    <p>TYT Puanınız: @ViewData["tytPuan"]</p>
 
 
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-    <input type="submit" name="Sumit" value="Hesapla" formmethod="post" class="btn btn-primary" />
-}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="~/Content/puanHesapla.css" rel="stylesheet" />
+    <!------ Include the above in your HEAD tag ---------->
+    <div class="container contact-form">
+        <div class="contact-image">
+            <img src="http://www.iconarchive.com/download/i75811/martz90/circle/calculator.ico" alt="rocket_contact" />
+        </div>
+        @using (Html.BeginForm("Index", "PuanHesapla", FormMethod.Post))
+        {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <form method="post">
+            <h3>YKS PUAN HESAPLAMA</h3>
+
+
+            <div class="row">
+
+                <div class="form-group row col-md-12" style="padding-top:2%">
+                    <div class="col-md-3 form-group ">
+                        
+                    </div>
+                    <div class="col-md-3 form-group ">
+
+                        &nbsp;  &nbsp; &nbsp; &nbsp;  DOĞRU
+                    </div>
+                    <div class="col-md-3 form-group ">
+                        &nbsp; &nbsp; &nbsp; &nbsp; YANLIŞ
+                    </div>
+                    <div class="col-md-3 form-group ">
+                        NET
+                    </div>
+
+                </div>
+                    <div class="form-group row col-md-12" style="padding-top:7%">
+
+
+                        <div class="col-md-3 form-group ">
+                            TÜRKÇE
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.turkceDogru, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.turkceDogru)
+
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.turkceYanlis, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.turkceYanlis)
+
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @ViewData["turkceNet"]
+
+                        </div>
+
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group row  col-md-12" style="padding-top:2%">
+
+                        <div class="col-md-3 form-group ">
+                            SOSYAL
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.sosyalDogru, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.sosyalDogru)
+
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.sosyalYanlis, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.sosyalYanlis)
+
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @ViewData["sosyalNet"]
+
+                        </div>
+
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group row  col-md-12" style="padding-top:2%">
+
+                        <div class="col-md-3 form-group ">
+                            MATEMATİK
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.matematikDogru, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.matematikDogru)
+
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.matematikYanlis, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.matematikYanlis)
+
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @ViewData["matematikNet"]
+
+                        </div>
+
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group row  col-md-12" style="padding-top:2%">
+
+                        <div class="col-md-3 form-group ">
+                            FEN
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.fenDogru, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.fenDogru)
+
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @Html.TextBoxFor(model => model.fenYanlis, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.fenYanlis)
+                        </div>
+                        <div class="col-md-3 form-group">
+                            @ViewData["fenNet"]
+
+                        </div>
+
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group row  col-md-12" style="padding-top:2%">
+
+                        <div class="col-md-3 form-group ">
+                            DİPLOMA NOTU
+                        </div>
+                        <div class="col-md-9 form-group ">
+                            @Html.TextBoxFor(model => model.diplomaNotu, new { @class = "form-control", placeholder = "Diploma Notunuz" })
+                            @Html.ValidationMessageFor(model => model.diplomaNotu)
+                        </div>
+
+
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <div class="form-group row  col-md-12" style="padding-top:2%">
+
+                        <div class="col-md-3 form-group ">
+
+                        </div>
+                        <div class="col-md-9 form-group ">
+                            <input type="submit" name="Sumit" value="Hesapla" formmethod="post" class="btnContact" />
+
+                        </div>
+
+
+                    </div>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+
+                    <div class="form-group row  col-md-12" style="padding-top:2%">
+
+                        <div class="col-md-3 form-group ">
+                            PUAN:
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @ViewData["tytPuan"]
+                        </div>
+
+                        <div class="col-md-5 form-group">
+                            &nbsp;  TOPLAM NET:   @ViewData["toplamNet"]
+
+                        </div>
+
+                    </div>
+
+                </div>
+</form>
+
+        }
+    </div>
+
+
+
 
 
 

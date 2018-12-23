@@ -35,6 +35,8 @@ namespace TercihRobotumBuSonOlsun.Controllers
                 ViewBag.matematikNet = matematikNet;
                 ViewBag.fenNet = fenNet;
 
+                ViewBag.toplamNet = fenNet + turkceNet + matematikNet + sosyalNet;
+
                ViewBag.tytPuan= PuanHesapla(turkceNet, sosyalNet, matematikNet, fenNet, model.diplomaNotu);
 
             }
