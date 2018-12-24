@@ -11,8 +11,8 @@
 <div class="row">
 
     <div class="col-sm-2 bg-light p-3">
-        @using (Html.BeginForm("Sorgula", "Home", FormMethod.Get, new { role = "form" }))
-        {
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { role = "form" }))
+        { 
 
             <form>
                 <div class="card mb-1">
@@ -25,8 +25,8 @@
                             <div class="card-body">
 
                                 <label class="form-check">
-                                  
-                                    <input class="form-check-input" type="checkbox" value="">
+                                  @Html.CheckBox("universiteDevlet",new  { @class="form-check-input"})
+                                   
                                     <span class="form-check-label">
                                         Devlet
                                     </span>
@@ -247,24 +247,14 @@
         </table>
         <div class="row">
             <div class="col-6">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+               new { page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
             </div>
 
             <div class="col-6">
 
                 Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.
-                @*<form class="form-inline">
-                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Listeleme Limiti</label>
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                            <option selected>10</option>
-                            <option value="1">50</option>
-                            <option value="2">100</option>
-                            <option value="3">1000</option>
-                        </select>
-
-
-                    </form>*@
-
+               
             </div>
 
         </div>
