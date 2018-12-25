@@ -1,0 +1,79 @@
+﻿@model TercihRobotumBuSonOlsun.Models.FilitreModels
+@using PagedList;
+@using PagedList.Mvc;
+
+<table class="table table-hover">
+    <thead>
+
+        @* Başlıkları Çektiğim Yer  *@
+        <tr>
+
+            <th scope="col">Listeme Ekle</th>
+            <th scope="col"> @Html.ActionLink("Program Kodu", "Index", new { sortOrder = ViewBag.SortingKodaGore, currentFilter = ViewBag.CurrentFilter })</th>
+            <th scope="col">@Html.ActionLink("Program Adı", "Index", new { sortOrder = ViewBag.SortingAdaGore, currentFilter = ViewBag.CurrentFilter })</th>
+            <th scope="col">@Html.ActionLink("Puan Türü", "Index", new { sortOrder = ViewBag.SortingPuanTuruneGore, currentFilter = ViewBag.CurrentFilter })</th>
+            <th scope="col">@Html.ActionLink("Kontenjan", "Index", new { sortOrder = ViewBag.SortingKontenjanaGore, currentFilter = ViewBag.CurrentFilter })</th>
+            <th scope="col">@Html.ActionLink("Yerleşen", "Index", new { sortOrder = ViewBag.SortingYerleseneGore, currentFilter = ViewBag.CurrentFilter })</th>
+            <th scope="col">@Html.ActionLink("En Küçük Puan", "Index", new { sortOrder = ViewBag.SortingEnKucukPuanaGore, currentFilter = ViewBag.CurrentFilter })</th>
+            <th scope="col">@Html.ActionLink("En Büyük Puan", "Index", new { sortOrder = ViewBag.SortingEnBuyukPuanaGore, currentFilter = ViewBag.CurrentFilter })</th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+        @* Tablo Verilerini Çektiğim Yer  *@
+        @foreach (var item in Model.TercihVerileri)
+        {
+            <tr>
+                @using (Html.BeginForm("Ekle", "Home", FormMethod.Post, new { id = "ekleForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <td>
+
+                        <a class="btn btn-primary" href="@Url.Action("Ekle", "Home", new {ProgramKodu=item.ProgramKodu,ProgramAdi=item.ProgramAdi,PuanTuru=item.PuanTuru,Kontenjan=item.Kontenjan,Yerlesen=item.Yerlesen,EnKucukPuan=item.EnKucukPuan,EnBuyukPuan=item.EnBuyukPuan})" title="Add">
+                            +
+                        </a>
+
+
+                    </td>
+                }
+                <td>@item.ProgramKodu</td>
+                <td>@item.ProgramAdi  </td>
+                <td>@item.PuanTuru   </td>
+                <td>@item.Kontenjan   </td>
+                <td>@item.Yerlesen    </td>
+                <td>@item.EnKucukPuan</td>
+                <td>@item.EnBuyukPuan</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-6">
+        @Html.PagedListPager(Model.TercihVerileri, page => Url.Action("Index",
+           new RouteValueDictionary
+           {
+               {"Page",page },
+               {"AramaMetni",Model.AramaMetni },
+               {"Tyt",Model.Tyt },
+               {"Tm",Model.Tm },
+               {"Mf",Model.Mf },
+               {"Ts",Model.Ts },
+               {"Dil",Model.Dil},
+               {"PuanMin",Model.PuanMin },
+               {"PuanMax",Model.PuanMax },
+               {"Burslu",Model.Burslu },
+               {"KKTC",Model.KKTC },
+
+
+
+           }),PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId="ajax-main"}))
+    </div>
+
+    <div class="col-6">
+
+        Toplam @Model.TercihVerileri.TotalItemCount kayıt bulundu. Bu sayfada @Model.TercihVerileri.FirstItemOnPage ile @Model.TercihVerileri.LastItemOnPage arası kayıtlar gösteriliyor.
+
+    </div>
+
+</div>

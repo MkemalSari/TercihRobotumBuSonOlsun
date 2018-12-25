@@ -1,7 +1,7 @@
-﻿@model PagedList.IPagedList<TercihRobotumBuSonOlsun.Models.TercihVeriModel>
+﻿@model TercihRobotumBuSonOlsun.Models.FilitreModels
 
 
-@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Home Page";
 
@@ -11,156 +11,154 @@
 <div class="row">
 
     <div class="col-sm-2 bg-light p-3">
-        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { role = "form" }))
+        @using (Ajax.BeginForm("Index", "Home", FormMethod.Get, new AjaxOptions {OnSuccess="loadCust" }))
         { 
 
-            <form>
-                <div class="card mb-1">
-                    <article class="card-group-item">
-                        <header class="card-header">
-                            <h6 class="title">Üniversite Türü </h6>
+        <form>
+            <p class="form-row">
+                @Html.TextBoxFor(m => m.AramaMetni, new { @class = "form-control", placeholder = "Bölüm Ara" })
+                @*<input class="btn btn-primary  " type="submit" value="Ara" />*@
+            </p>
+            <div class="card mb-1">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h6 class="title">Üniversite Türü </h6>
 
-                        </header>
-                        <div class="filter-content">
-                            <div class="card-body">
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
 
-                                <label class="form-check">
-                                  @Html.CheckBox("universiteDevlet",new  { @class="form-check-input"})
-                                   
-                                    <span class="form-check-label">
-                                        Devlet
-                                    </span>
-                                </label> <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        Vakıf
-                                    </span>
-                                </label>  <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        Burslu
-                                    </span>
-                                </label>  <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        Yurt Dışı
-                                    </span>
-                                </label>  <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        KKTC
-                                    </span>
-                                </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f=> f.Devlet, new {@class="form-check-input" })
 
-                            </div> <!-- card-body.// -->
-                        </div>
-                    </article> <!-- card-group-item.// -->
-                </div> <!-- card.// -->
-                <div class="card mb-1">
-                    <article class="card-group-item">
-                        <header class="card-header">
-                            <h6 class="title">Eğitim Süresi </h6>
-                        </header>
-                        <div class="filter-content">
-                            <div class="card-body">
+                                <span class="form-check-label">
+                                    Devlet
+                                </span>
+                            </label> <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Vakif, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Vakıf
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Burslu, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Burslu
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.KKTC, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    KKTC
+                                </span>
+                            </label>  <!-- form-check.// -->
 
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        Lisans
-                                    </span>
-                                </label> <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        Önlisans
-                                    </span>
-                                </label>  <!-- form-check.// -->
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
+            <div class="card mb-1">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h6 class="title">Eğitim Süresi </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Lisans, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Lisans
+                                </span>
+                            </label> <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.OnLisans, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Önlisans
+                                </span>
+                            </label>  <!-- form-check.// -->
 
 
-                            </div> <!-- card-body.// -->
-                        </div>
-                    </article> <!-- card-group-item.// -->
-                </div> <!-- card.// -->
-                <div class="card mb-1">
-                    <article class="card-group-item">
-                        <header class="card-header">
-                            <h6 class="title">Puan Türü </h6>
-                        </header>
-                        <div class="filter-content">
-                            <div class="card-body">
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
+            <div class="card mb-1">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h6 class="title">Puan Türü </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
 
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        TM
-                                    </span>
-                                </label> <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        TYT
-                                    </span>
-                                </label>  <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        MF
-                                    </span>
-                                </label>  <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        TS
-                                    </span>
-                                </label>  <!-- form-check.// -->
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    <span class="form-check-label">
-                                        DİL
-                                    </span>
-                                </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Tm, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    TM
+                                </span>
+                            </label> <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Tyt, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    TYT
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Mf, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    MF
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Ts, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    TS
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Dil, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    DİL
+                                </span>
+                            </label>  <!-- form-check.// -->
 
 
-                            </div> <!-- card-body.// -->
-                        </div>
-                    </article> <!-- card-group-item.// -->
-                </div> <!-- card.// -->
-                <div class="card mb-1">
-                    <article class="card-group-item">
-                        <header class="card-header">
-                            <h6 class="title">Puan </h6>
-                        </header>
-                        <div class="filter-content">
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
+            <div class="card mb-1">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h6 class="title">Puan </h6>
+                    </header>
+                    <div class="filter-content">
 
-                            <div class=" card-body">
+                        <div class=" card-body">
 
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Min">
-                                    </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Max">
-                                    </div>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.TextBoxFor(f=> f.PuanMin,new {@class="form-control" ,placeholder="Min" })
                                 </div>
-
+                                <div class="col">
+                                    @Html.TextBoxFor(f => f.PuanMax, new { @class = "form-control", placeholder = "Max" })
+                                </div>
                             </div>
+
                         </div>
-                    </article> <!-- card-group-item.// -->
-                </div> <!-- card.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
 
 
 
 
 
-                <button type="submit" class="btn btn-primary">Uygula</button>
+            <button type="submit" class="btn btn-primary">Uygula</button>
 
 
-            </form>
+        </form>
         }
 
 
@@ -173,104 +171,31 @@
     <div class="col-sm-10 p-3">
         <h3 class="text-center">2018 YKS Sınavı</h3>
         <div class="row">
-            <div class="col-6">
-
-                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            @*<div class="col-6">
+                @using (Ajax.BeginForm("Index", "Home", FormMethod.Get, new AjaxOptions { OnSuccess = "loadCust" }))
                 {
-                    <p class="form-row">
-                        @Html.TextBox("aramaMetni", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Arama" })
-                        <input class="btn btn-primary  " type="submit" value="Ara" />
-                    </p>
 
+            <p class="form-row">
+                @Html.TextBoxFor(m => m.AramaMetni, new { @class = "form-control", placeholder = "Arama" })
+                <input class="btn btn-primary  " type="submit" value="Ara" />
+            </p>
                 }
-            </div>
-            <div class="col-6">
-                <div class="btn-toolbar     justify-content-end pb-1 " role="toolbar" aria-label="Toolbar with button groups">
 
-                    <div class="btn-group mr-2 " role="group" aria-label="First group">
-                        <button type="button" class="btn btn-secondary active">2018</button>
-                        <button type="button" class="btn btn-secondary">2017</button>
-                        <button type="button" class="btn btn-secondary">2016</button>
-                        <button type="button" class="btn btn-secondary">2015</button>
-                    </div>
-
-                </div>
-            </div>
+            </div>*@
+         
 
 
         </div>
-        <table class="table table-hover">
-            <thead>
-
-                @* Başlıkları Çektiğim Yer  *@
-                <tr>
-
-                    <th scope="col">Listeme Ekle</th>
-                    <th scope="col"> @Html.ActionLink("Program Kodu", "Index", new { sortOrder = ViewBag.SortingKodaGore, currentFilter = ViewBag.CurrentFilter })</th>
-                    <th scope="col">@Html.ActionLink("Program Adı", "Index", new { sortOrder = ViewBag.SortingAdaGore, currentFilter = ViewBag.CurrentFilter })</th>
-                    <th scope="col">@Html.ActionLink("Puan Türü", "Index", new { sortOrder = ViewBag.SortingPuanTuruneGore, currentFilter = ViewBag.CurrentFilter })</th>
-                    <th scope="col">@Html.ActionLink("Kontenjan", "Index", new { sortOrder = ViewBag.SortingKontenjanaGore, currentFilter = ViewBag.CurrentFilter })</th>
-                    <th scope="col">@Html.ActionLink("Yerleşen", "Index", new { sortOrder = ViewBag.SortingYerleseneGore, currentFilter = ViewBag.CurrentFilter })</th>
-                    <th scope="col">@Html.ActionLink("En Küçük Puan", "Index", new { sortOrder = ViewBag.SortingEnKucukPuanaGore, currentFilter = ViewBag.CurrentFilter })</th>
-                    <th scope="col">@Html.ActionLink("En Büyük Puan", "Index", new { sortOrder = ViewBag.SortingEnBuyukPuanaGore, currentFilter = ViewBag.CurrentFilter })</th>
-                </tr>
-
-
-            </thead>
-            <tbody>
-                @* Tablo Verilerini Çektiğim Yer  *@
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        @using (Html.BeginForm("Ekle", "Home", FormMethod.Post, new { id = "ekleForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <td>
-
-                                <a class="btn btn-primary" href="@Url.Action("Ekle", "Home", new {ProgramKodu=item.ProgramKodu,ProgramAdi=item.ProgramAdi,PuanTuru=item.PuanTuru,Kontenjan=item.Kontenjan,Yerlesen=item.Yerlesen,EnKucukPuan=item.EnKucukPuan,EnBuyukPuan=item.EnBuyukPuan})" title="Add">
-                                    +
-                                </a>
-
-
-                            </td>
-                        }
-                        <td>@item.ProgramKodu</td>
-                        <td>@item.ProgramAdi  </td>
-                        <td>@item.PuanTuru   </td>
-                        <td>@item.Kontenjan   </td>
-                        <td>@item.Yerlesen    </td>
-                        <td>@item.EnKucukPuan</td>
-                        <td>@item.EnBuyukPuan</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-6">
-                @Html.PagedListPager(Model, page => Url.Action("Index",
-               new { page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
-            </div>
-
-            <div class="col-6">
-
-                Toplam @Model.TotalItemCount kayıt bulundu. Bu sayfada @Model.FirstItemOnPage ile @Model.LastItemOnPage arası kayıtlar gösteriliyor.
-               
-            </div>
-
+        <div id="ajax-main">
+            
+            @Html.Partial("_View",@Model)
         </div>
     </div>
 
-    @Url.Action()
 
 </div>
-<script>
-    function Deneme() {
-        $.ajax({
-            url: '@Url.Action("Ekle","Home")',
-            type: 'POST',
-            data: { movieName: $('#BtnDeneme').val() },
-        }).done(function () {
-            alert('Modify Movie');
-        });
+<script type="text/javascript">
+    function loadCust(result) {
+        $("#ajax-main").html(result);
     }
 </script>
