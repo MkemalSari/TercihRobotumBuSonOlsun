@@ -29,7 +29,7 @@
                         <div class="card-body">
 
                             <label class="form-check">
-                                @Html.CheckBoxFor(f=> f.Devlet, new {@class="form-check-input" })
+                                @Html.CheckBoxFor(f => f.Devlet, new { @class = "form-check-input" })
 
                                 <span class="form-check-label">
                                     Devlet
@@ -76,6 +76,32 @@
                                 @Html.CheckBoxFor(f => f.OnLisans, new { @class = "form-check-input" })
                                 <span class="form-check-label">
                                     Önlisans
+                                </span>
+                            </label>  <!-- form-check.// -->
+
+
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
+            <div class="card mb-1">
+                <article class="card-group-item">
+                    <header class="card-header">
+                        <h6 class="title">Eğitim Dili </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Turkce, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Türkçe
+                                </span>
+                            </label> <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.Ingilizce, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    İngilizce
                                 </span>
                             </label>  <!-- form-check.// -->
 
@@ -139,7 +165,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    @Html.TextBoxFor(f=> f.PuanMin,new {@class="form-control" ,placeholder="Min" })
+                                    @Html.TextBoxFor(f => f.PuanMin, new { @class = "form-control", placeholder = "Min" })
                                 </div>
                                 <div class="col">
                                     @Html.TextBoxFor(f => f.PuanMax, new { @class = "form-control", placeholder = "Max" })

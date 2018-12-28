@@ -9,74 +9,91 @@
 <h2>Tercih Listem</h2>
 
 <p>
-    @Html.ActionLink("Pdf Olarak Çıkart", "TercihListemPdf", new {}, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Pdf Olarak Çıkart", "TercihListemPdf", new { }, new { @class = "btn btn-primary" })
+    <div class="fb-share-button"
+         data-href="https://www.tercihrobotum.somee.com"
+         data-layout="button_count">
+    </div>
+
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Sıra
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProgramKodu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProgramAdi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PuanTuru)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kontenjan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Yerlesen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EnKucukPuan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EnBuyukPuan)
-        </th>
 
-        <th>
-            Sil
-        </th>
-    </tr>
+<div id="fb-root"></div>
+    <table class="table">
+        <tr>
+            <th>
+                Sıra
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramKodu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PuanTuru)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kontenjan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Yerlesen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnKucukPuan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnBuyukPuan)
+            </th>
 
-@foreach (var item in Model) {
+            <th>
+                Sil
+            </th>
+        </tr>
 
-    sayac++;
-    <tr>
-        <td>
-            @sayac
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProgramKodu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProgramAdi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PuanTuru)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kontenjan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Yerlesen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EnKucukPuan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EnBuyukPuan)
-        </td>
+        @foreach (var item in Model)
+        {
 
-        <td>
+            sayac++;
+            <tr>
+                <td>
+                    @sayac
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramKodu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PuanTuru)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kontenjan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Yerlesen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnKucukPuan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnBuyukPuan)
+                </td>
 
-            @Html.ActionLink("Sil", "Sil", new { id = item.Id }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+                <td>
 
-</table>
+                    @Html.ActionLink("Sil", "Sil", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=289316071264293&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>

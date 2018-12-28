@@ -24,13 +24,20 @@ namespace IdentitySample.Controllers
             int pageNumber = (models.Page ?? 1);
             models.TercihVerileri = tercihContext.TercihVerileri.Where(f =>
             (String.IsNullOrEmpty(models.AramaMetni) || f.ProgramAdi.Contains(models.AramaMetni)) &&
-            (!models.Burslu || f.ProgramAdi.Contains("Burslu")) &&
+            ((!models.Burslu || f.ProgramAdi.Contains("Burslu")) &&
             (!models.KKTC || f.ProgramAdi.Contains("KKTC-")) &&
             (!models.Tm || f.PuanTuru.Contains("EA"))&&
             (!models.Tyt || f.PuanTuru.Contains("TYT")) &&
             (!models.Mf || f.PuanTuru.Contains("SAY")) &&
             (!models.Ts || f.PuanTuru.Contains("SÖZ")) &&
-            (!models.Dil || f.PuanTuru.Contains("DİL"))
+            (!models.Dil || f.PuanTuru.Contains("DİL"))&&
+            (!models.Ingilizce || f.ProgramAdi.Contains("(İngilizce)")) &&
+            (!models.Turkce || !f.ProgramAdi.Contains("(İngilizce)")) 
+
+
+
+
+            )
         
 
 
