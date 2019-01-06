@@ -23,10 +23,14 @@ namespace TercihRobotumBuSonOlsun.Models
         public bool Mf { get; set; }
         public bool Ts { get; set; }
         public bool Dil { get; set; }
-        public string PuanMin { get; set; }
-        public string PuanMax { get; set; }
+        public double PuanMin { get; set; }
+        public double PuanMax { get; set; }
         public bool Ingilizce { get; set; }
         public bool Turkce { get; set; }
+        public bool BirinciOgretim { get; set; }
+        public bool İkinciogretim { get; set; }
+        public bool AcikOgretim { get; set; }
+        public bool UzaktanOgretim { get; set; }
 
         //public string ProgramKodu { get; set; }
         //public string ProgramAdi { get; set; }

@@ -14,8 +14,8 @@ namespace TercihRobotumBuSonOlsun.Models
         public string PuanTuru { get; set; }
         public string Kontenjan { get; set; }
         public string Yerlesen { get; set; }
-        public string EnKucukPuan { get; set; }
-        public string EnBuyukPuan { get; set; }
+        public double EnKucukPuan { get; set; }
+        public double EnBuyukPuan { get; set; }
 
        
 

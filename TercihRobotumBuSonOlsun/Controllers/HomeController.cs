@@ -17,19 +17,13 @@ namespace IdentitySample.Controllers
         TercihContext tercihContext = new TercihContext();
         List<TercihVeriModel> localList = new List<TercihVeriModel>();
 
-
+        //Tercih Verilerinin Listelendiği ana sayfa sorgularmızı burda yapıyoruz
         public ActionResult Index( FilitreModels models)
         {
-            if (models.PuanMin==null)
+            if (models.PuanMax==0)
             {
-                models.PuanMin = "0";
+               models.PuanMax = 600;
             }
-            if (models.PuanMax == null)
-            {
-                models.PuanMax = "0";
-            }
-            string minPuan = (models.PuanMin);
-            string maxPuan = (models.PuanMax);
 
             int pageNumber = (models.Page ?? 1);
             models.TercihVerileri = tercihContext.TercihVerileri.Where(f =>
@@ -44,7 +38,12 @@ namespace IdentitySample.Controllers
             (!models.Ingilizce || f.ProgramAdi.Contains("(İngilizce)")) &&
             (!models.Turkce || !f.ProgramAdi.Contains("(İngilizce)")) &&
              (!models.Lisans || !f.PuanTuru.Contains("TYT")) &&
-              (!models.OnLisans || f.PuanTuru.Contains("TYT"))
+              (!models.OnLisans || f.PuanTuru.Contains("TYT"))&&
+               (!models.BirinciOgretim || !f.ProgramAdi.Contains("(İÖ)")) &&
+              (!models.İkinciogretim || f.ProgramAdi.Contains("(İÖ)")) &&
+               (!models.AcikOgretim || f.ProgramAdi.Contains("(Açıköğretim)")) &&
+                (!models.UzaktanOgretim || f.ProgramAdi.Contains("(Uzaktan Öğretim)")) &&
+              (models.PuanMin<f.EnKucukPuan &&models.PuanMax>f.EnBuyukPuan)
             
                     
 
@@ -167,7 +166,7 @@ namespace IdentitySample.Controllers
         [Authorize]
       
         // Kişinin Id sine göre Listesine ekleme Yapıyoruz
-        public ActionResult Ekle(string ProgramKodu, string ProgramAdi, string PuanTuru, string Kontenjan, string Yerlesen, string EnKucukPuan, string EnBuyukPuan)
+        public ActionResult Ekle(string ProgramKodu, string ProgramAdi, string PuanTuru, string Kontenjan, string Yerlesen, double EnKucukPuan, double EnBuyukPuan)
         {
           var userId=  User.Identity.GetUserId();
             MyViewModel model = new MyViewModel();

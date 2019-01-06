@@ -12,10 +12,11 @@
 <p>
     @Html.ActionLink("Pdf Olarak Çıkart", "TercihListemPdf", new { }, new { @class = "btn btn-primary" })
     <input type="button" id="btnPrint" class="btn btn-success" value="Yazdır" />
-    <div class="fb-share-button"
+    <button class="fb-share-button btn" style="background-color:#4267b2"
          data-href="https://www.tercihrobotum.somee.com/Mylist?id=@User.Identity.GetUserId()"
-         data-layout="button_count">
-    </div>
+         data-layout="button">
+       
+    </button>
 
 </p>
 

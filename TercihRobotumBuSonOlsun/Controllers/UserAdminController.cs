@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 using IdentitySample.Models;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -279,6 +280,7 @@ namespace IdentitySample.Controllers
                             TercihVeriModel model = new TercihVeriModel();
                             if (dataRow.RowNumber() > 1 && dataRow.Cell(1).Value.ToString() != "Program Kodu"
                                 && dataRow.Cell(1).Value.ToString() != "TABLO-4 Merkezi Yerleştirme İle Öğrenci Alan Yükseköğretim Lisans Programları"
+                                && dataRow.Cell(1).Value.ToString() != "TABLO-3 Merkezi Yerleştirme İle Öğrenci Alan Yükseköğretim Önlisans Programları"
                                 && dataRow.Cell(1).Value.ToString() != ""
                                 )
                             {   //TAblo verileribi Gönderdiğim Yer
@@ -289,19 +291,20 @@ namespace IdentitySample.Controllers
                                 model.Yerlesen = dataRow.Cell(5).Value.ToString();
                                 if (dataRow.Cell(6).Value.ToString() == "--")
                                 {
-                                    model.EnKucukPuan = "0";
+                                    model.EnKucukPuan = 0;
                                 }
                                 else
                                 {
-                                    model.EnKucukPuan = dataRow.Cell(6).Value.ToString();
+                                    model.EnKucukPuan = dataRow.Cell(6).GetDouble();
+                                        
                                 }
                                 if (dataRow.Cell(7).Value.ToString() == "--")
                                 {
-                                    model.EnBuyukPuan = "0";
+                                    model.EnBuyukPuan = 0;
                                 }
                                 else
                                 {
-                                    model.EnBuyukPuan = dataRow.Cell(7).Value.ToString();
+                                    model.EnBuyukPuan =dataRow.Cell(7).GetDouble();
                                 }
 
 

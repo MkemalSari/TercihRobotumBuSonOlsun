@@ -113,6 +113,44 @@
             <div class="card mb-1">
                 <article class="card-group-item">
                     <header class="card-header">
+                        <h6 class="title">Öğrenin Türü </h6>
+                    </header>
+                    <div class="filter-content">
+                        <div class="card-body">
+
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.BirinciOgretim, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    1.Öğretim
+                                </span>
+                            </label> <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.İkinciogretim, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    2.Öğretim
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.AcikOgretim, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Açık Öğretim
+                                </span>
+                            </label>  <!-- form-check.// -->
+                            <label class="form-check">
+                                @Html.CheckBoxFor(f => f.UzaktanOgretim, new { @class = "form-check-input" })
+                                <span class="form-check-label">
+                                    Uzaktan Öğretim
+                                </span>
+                            </label>  <!-- form-check.// -->
+
+
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- card-group-item.// -->
+            </div> <!-- card.// -->
+            <div class="card mb-1">
+                <article class="card-group-item">
+                    <header class="card-header">
                         <h6 class="title">Puan Türü </h6>
                     </header>
                     <div class="filter-content">
@@ -165,9 +203,11 @@
 
                             <div class="row">
                                 <div class="col">
+                                    <p> Min</p>
                                     @Html.TextBoxFor(f => f.PuanMin, new { @class = "form-control", placeholder = "Min" })
                                 </div>
                                 <div class="col">
+                                    <p> Max</p>
                                     @Html.TextBoxFor(f => f.PuanMax, new { @class = "form-control", placeholder = "Max" })
                                 </div>
                             </div>
