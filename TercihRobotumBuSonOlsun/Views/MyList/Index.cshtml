@@ -1,99 +1,114 @@
 ﻿@model IEnumerable<TercihimNihaiProje.Models.MyViewModel>
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int sayac = 0;
+
 }
 
 <h2>Tercih Listem</h2>
 
 <p>
     @Html.ActionLink("Pdf Olarak Çıkart", "TercihListemPdf", new { }, new { @class = "btn btn-primary" })
+    <input type="button" id="btnPrint" class="btn btn-success" value="Yazdır" />
     <div class="fb-share-button"
-         data-href="https://www.tercihrobotum.somee.com"
+         data-href="https://www.tercihrobotum.somee.com/Mylist?id=@User.Identity.GetUserId()"
          data-layout="button_count">
     </div>
 
 </p>
 
 <div id="fb-root"></div>
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            Sıra
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramKodu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PuanTuru)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kontenjan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Yerlesen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnKucukPuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnBuyukPuan)
+        </th>
+
+        <th>
+            Sil
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        sayac++;
         <tr>
-            <th>
-                Sıra
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProgramKodu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProgramAdi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PuanTuru)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kontenjan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Yerlesen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EnKucukPuan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EnBuyukPuan)
-            </th>
+            <td>
+                @sayac
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramKodu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PuanTuru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kontenjan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yerlesen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnKucukPuan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnBuyukPuan)
+            </td>
 
-            <th>
-                Sil
-            </th>
+            <td>
+
+                @Html.ActionLink("Sil", "Sil", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
+</table>
 
-            sayac++;
-            <tr>
-                <td>
-                    @sayac
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProgramKodu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProgramAdi)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PuanTuru)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kontenjan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Yerlesen)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnKucukPuan)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnBuyukPuan)
-                </td>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=289316071264293&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
-                <td>
 
-                    @Html.ActionLink("Sil", "Sil", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-
-    </table>
-
+</script>
+@section scripts
+{
     <script>
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=289316071264293&version=v2.0";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        $(function () {
+            $("#btnPrint").click(function () {
+                window.print();
+            });
+        });
+    </script>
+}

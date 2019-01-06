@@ -20,6 +20,16 @@ namespace IdentitySample.Controllers
 
         public ActionResult Index( FilitreModels models)
         {
+            if (models.PuanMin==null)
+            {
+                models.PuanMin = "0";
+            }
+            if (models.PuanMax == null)
+            {
+                models.PuanMax = "0";
+            }
+            string minPuan = (models.PuanMin);
+            string maxPuan = (models.PuanMax);
 
             int pageNumber = (models.Page ?? 1);
             models.TercihVerileri = tercihContext.TercihVerileri.Where(f =>
@@ -32,13 +42,16 @@ namespace IdentitySample.Controllers
             (!models.Ts || f.PuanTuru.Contains("SÖZ")) &&
             (!models.Dil || f.PuanTuru.Contains("DİL"))&&
             (!models.Ingilizce || f.ProgramAdi.Contains("(İngilizce)")) &&
-            (!models.Turkce || !f.ProgramAdi.Contains("(İngilizce)")) 
+            (!models.Turkce || !f.ProgramAdi.Contains("(İngilizce)")) &&
+             (!models.Lisans || !f.PuanTuru.Contains("TYT")) &&
+              (!models.OnLisans || f.PuanTuru.Contains("TYT"))
+            
+                    
 
 
 
+            ) 
 
-            )
-        
 
 
 

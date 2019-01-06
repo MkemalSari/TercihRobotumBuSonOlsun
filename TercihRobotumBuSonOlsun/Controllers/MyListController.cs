@@ -13,16 +13,20 @@ using Rotativa;
 
 namespace TercihRobotumBuSonOlsun.Controllers
 {
-    [Authorize]
+    
     public class MyListController : Controller
     {
         private TercihContext db = new TercihContext();
         
         // GET: MyList
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            var userId = User.Identity.GetUserId();
-            var list = db.Tercihler.Where(a => a.UserlId == userId).OrderByDescending(a=> a.EnBuyukPuan);
+            if (id==null)
+            {
+                id = User.Identity.GetUserId();
+            }
+           
+            var list = db.Tercihler.Where(a => a.UserlId == id).OrderByDescending(a=> a.EnBuyukPuan);
             
             return View(list.ToList());
         }
@@ -110,6 +114,7 @@ namespace TercihRobotumBuSonOlsun.Controllers
             }
             return View(myViewModel);
         }
+        [Authorize]
         public ActionResult Sil(int? id)
         {
             if (id == null)
